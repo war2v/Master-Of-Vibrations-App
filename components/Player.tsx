@@ -5,10 +5,6 @@ import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import usePlayer from "@/hooks/usePlayer";
 import PlayerContent from "./PlayerContent";
 
-interface PlayerProps {
-    
-}
-
 const Player = () => {
     const player = usePlayer();
     const { song } = useGetSongById(player.activeId);
