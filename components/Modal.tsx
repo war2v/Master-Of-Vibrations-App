@@ -1,6 +1,5 @@
 // Packages
 import * as Dialog from "@radix-ui/react-dialog";
-import { HiArrowCircleUp } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 
 interface ModalProps {
