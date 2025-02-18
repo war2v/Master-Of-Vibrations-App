@@ -8,7 +8,7 @@ import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
-import getSongsByUserID from "@/actions/getSongByUserID";
+import getSongs from "@/actions/getSongs";
 import Player from "@/components/Player";
 
 
@@ -30,7 +30,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const userSongs = await getSongsByUserID();
+  const userSongs = await getSongs();
 
   return (
     <html lang="en">

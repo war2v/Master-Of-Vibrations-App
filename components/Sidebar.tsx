@@ -33,6 +33,12 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
             label: 'Search',
             active: pathname === '/search',
             href: '/search',
+        },
+        {
+            icon: BiSearch,
+            label: 'Videos',
+            active: pathname === '/videos',
+            href: '/videos',
         }
     ], [pathname]);
   return (
