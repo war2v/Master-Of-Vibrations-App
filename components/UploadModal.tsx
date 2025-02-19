@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 import uniqid from "uniqid";
@@ -20,6 +20,7 @@ const UploadModal = () =>{
     const { user } = useUser();
     const supabaseClient = useSupabaseClient();
     const router = useRouter();
+    
 
     const {
         register,
@@ -35,6 +36,7 @@ const UploadModal = () =>{
     });
 
     const onChange = (open: boolean) => {
+        
         if (!open) {
             reset();
             uploadModal.onClose();
@@ -42,6 +44,7 @@ const UploadModal = () =>{
     };
 
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+        console.log(values)
         try {
             setIsLoading(true);
 
@@ -49,67 +52,134 @@ const UploadModal = () =>{
 
             const songFile = values.song?.[0];
 
-            if(!imageFile || !songFile || !user) {
-                toast.error('Missing fields');
-                return;
-            }
+            const videoFile = values.video?.[0];
 
             const uniqueID = uniqid();
 
-            // Upload Song
+            if(!user){
+                
+                return toast.error("Error: Not Logged In");
+            }
+
+            if(!imageFile){
+                console.log(imageFile)
+                return toast.error("No Image File. Image is Required");
+            }
+
+            if(!songFile && !videoFile){
+                
+                return toast.error("No song and no video file. Must have atleast one.");
+            }
+
+            // ************************** UPLOAD IMAGE TO BUCKET *************************
             const {
-                data: songData,
-                error: songError,
+                data: imageData,
+                error: imageError,
             } = await supabaseClient
                 .storage
-                .from('songs')
-                .upload(`song-${values.title}-${uniqueID}`, songFile, {
+                .from('images')
+                .upload(`image-${values.title}-${uniqueID}`, imageFile, {
                     cacheControl: '3600',
                     upsert: false,
                 });
 
-                if (songError) {
-                    setIsLoading(false);
-                    return toast.error('Failed to upload song')
-                }
+                
+            if (imageError) {
+                setIsLoading(false);
+                return toast.error('Failed to upload image')
+            }
+
+
+            // ********************* UPLOAD SONG TO BUCKET *****************************
+            if (songFile) {
+                
             
                 const {
-                    data: imageData,
-                    error: imageError,
+                    data: songData,
+                    error: songError,
                 } = await supabaseClient
                     .storage
-                    .from('images')
-                    .upload(`image-${values.title}-${uniqueID}`, imageFile, {
+                    .from('songs')
+                    .upload(`song-${values.title}-${uniqueID}`, songFile, {
                         cacheControl: '3600',
                         upsert: false,
                     });
-    
-                    if (imageError) {
+
+                    if (songError) {
                         setIsLoading(false);
-                        return toast.error('Failed to upload image')
+                        return toast.error('Failed to upload song')
                     }
                 
+                
+                
+            
+                
+
+                // ********************* ADD SONG TO SONG TABLE *************************
                 const {
                     error: supabaseError
                 } = await supabaseClient
                                 .from('songs')
                                 .insert({
-                                    user_id: user.id,
+                                    user_id: user?.id,
                                     title: values.title,
                                     author: values.author,
                                     image_path: imageData.path,
                                     song_path: songData.path
                                 });
+
                 if (supabaseError) {
                     setIsLoading(false);
                     return toast.error(supabaseError.message);
                 }
 
-                router.refresh();
-                setIsLoading(false);
-                toast.success('Song Created!');
-                reset();
-                uploadModal.onClose();
+            }
+            console.log("Before video upload")
+
+            // ********************* UPLOAD VIDEO *******************************
+
+            if (videoFile) {
+                const {
+                    data: videoData,
+                    error: videoError
+                } = await supabaseClient
+                    .storage
+                    .from('videos')
+                    .upload(`video-${values.title}-${uniqueID}`, videoFile);
+    
+                if (videoError) {
+                    setIsLoading(false);
+                    return toast.error('Failed to upload video')
+                }
+                
+                // ********************* ADD VIDEO TO VIDEO TABLE *************************
+                console.log("Before video table")
+                const {
+                    error: supabaseError
+                } = await supabaseClient
+                    .from('videos')
+                    .insert({
+                        user_id: user?.id,
+                        title: values.title,
+                        author: values.author,
+                        image_path: imageData.path,
+                        video_path: videoData.path
+                    });
+
+                if (supabaseError) {
+                    setIsLoading(false);
+                    return toast.error(supabaseError.message);
+                }
+    
+
+            }
+            
+            router.refresh();
+            setIsLoading(false);
+            toast.success('Video Created!');
+            reset();
+            uploadModal.onClose();
+
         } catch (error){
             toast.error("Oops, something went wrong...")
         } finally {
@@ -120,6 +190,7 @@ const UploadModal = () =>{
 
 
     return (
+        
         <Modal 
         title="Add A Song"
         description="Upload mp3 or wav file"
@@ -138,6 +209,7 @@ const UploadModal = () =>{
                 <Input 
                 id="author"
                 disabled={isLoading}
+            
                 {...register('author', {required: true})}
                 placeholder="Song Author"
                 />
@@ -148,9 +220,21 @@ const UploadModal = () =>{
                     <Input 
                     id="song"
                     type="file"
-                    disabled={isLoading}
-                    {...register('song', {required: true})}
+                                   disabled={isLoading}
+                    {...register('song')}
                     accept=".mp3"
+                    />
+                </div>
+                <div>
+                    <div className="pb-1">
+                        Select Video File
+                    </div>
+                    <Input 
+                    id="video"
+                    type="file"
+                    disabled={isLoading}
+                    {...register('video')}
+                    accept="video/*"
                     />
                 </div>
                 <div>
@@ -160,7 +244,7 @@ const UploadModal = () =>{
                     <Input 
                     id="image"
                     type="file"
-                    disabled={isLoading}
+                                    disabled={isLoading}
                     {...register('image', {required: true})}
                     accept="image/*"
                     />

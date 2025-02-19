@@ -56,7 +56,7 @@ const MediaItem: React.FC<MediaItemProps> = ({data, onClick}) => {
                 flex
                 flex-col
                 gap-y-1
-                overflow-hidden>
+                overflow-hidden
             ">
                 <p
                 className="
