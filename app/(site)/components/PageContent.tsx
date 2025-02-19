@@ -1,14 +1,16 @@
 "use client";
 
 import SongItem from "@/components/SongItem";
+import VideoItem from "@/components/VideoItem";
 import useOnPlay from "@/hooks/useOnPlay";
-import { Song } from "@/types";
+import { Song,Video } from "@/types";
 
 interface PageContentProps {
     songs: Song[];
+    videos: Video[];
 }
 
-const PageContent: React.FC<PageContentProps> = ({songs}) => {
+const PageContent: React.FC<PageContentProps> = ({songs, videos}) => {
 
     const onPlay = useOnPlay(songs);
     
@@ -26,6 +28,7 @@ const PageContent: React.FC<PageContentProps> = ({songs}) => {
             <div className="flex gap-x-4  mt-4">
                 <div 
                     className="
+                        w-1/2
                         border-r
                         pr-4
                         border-black
@@ -48,6 +51,7 @@ const PageContent: React.FC<PageContentProps> = ({songs}) => {
                 </div>
                 <div 
                     className="
+                    w-1/2
                     grid
                     grid-cols-2
                     sm:grid-cols-3
@@ -57,27 +61,14 @@ const PageContent: React.FC<PageContentProps> = ({songs}) => {
                     2xl:grid-cols-4
                     gap-4
                 ">
-                    <video className="relative
-                                        group
-                                        flex
-                                        flex-col
-                                        items-center
-                                        justify-center
-                                        rounded-md
-                                        overflow-hidden
-                                        gap-x-4
-                                        bg-neutral-400/5
-                                        cursor-pointer
-                                        hover:bg-neutral-400/10
-                                        transition
-                                        p-3" width={300} height={300} controls>
-                            <source src="/test.mp4" type="video/mp4"/>
-                        No support for vid tag
-                    </video>
-                    <video width={300} height={300} controls>
-                        <source src="/test.mp4" type="video/mp4"/>
-                        No support for vid tag
-                    </video>
+                    {videos.map((item) => (
+                            <VideoItem
+                                key={item.id}
+                                onClick={(id: string) => onPlay(id)}
+                                data={item}
+                            />
+                        ))}
+                    
                 </div>
             </div>
         );

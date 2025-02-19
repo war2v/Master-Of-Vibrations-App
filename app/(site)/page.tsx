@@ -1,13 +1,15 @@
 import ListItem from "@/components/ListItem";
 import Header from "@/components/Header";
 import getSongs from "@/actions/getSongs";
+import getVideos from "@/actions/getVideos";
 import PageContent from "./components/PageContent";
 
 export const revalidate = 0;
 
 export default async function Home() {
 
-  const songs = await getSongs();
+  const songs  = await getSongs();
+  const videos = await getVideos();
 
   return (
     <div className="
@@ -51,9 +53,8 @@ export default async function Home() {
       ">
         <div 
         className="
-          flex
-          justify-between
-          items-center
+          grid
+          grid-cols-2
         ">
           <h1 
           className="
@@ -63,8 +64,16 @@ export default async function Home() {
           ">
             New Releases
           </h1>
+          <h1 
+          className="
+            text-white
+            text-2xl
+            font-semibold
+          ">
+            Videos
+          </h1>
         </div>
-        <PageContent songs={songs} />
+        <PageContent songs={songs} videos={videos} />
       </div>
     </div>
   );
