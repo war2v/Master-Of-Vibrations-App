@@ -3,11 +3,14 @@ import Header from "@/components/Header";
 import VideoContent from "../_components/VideoContent";
 import getVideos from "@/actions/getVideos";
 import { useEffect } from "react";
+import VideosContent from "../_components/VideosContent";
 
 
 const Videos = async ({params}: {params: {id: string}}) => {
-    const video = (await getVideosByID(params?.id))[0]
-    console.log(video);
+    const videos = await getVideos();
+    const id = await params?.id
+    const video = (await getVideosByID(id))[0]
+   
 
 
     return ( 
@@ -33,8 +36,9 @@ const Videos = async ({params}: {params: {id: string}}) => {
                 <VideoContent video={process.env.NEXT_SUPABASE_STORAGE_VIDEO_URL + video.video_path}/>
                 </div>
             </div>
-            <div>
-                <VideoCOnten
+            <div className="m-4">
+                <h5 className="font-semibold text-lg my-4 border-t-2 border-black">More Videos</h5>
+                <VideosContent videos={videos}/>
             </div>
         </div>
      );
