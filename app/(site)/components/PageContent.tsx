@@ -64,7 +64,7 @@ const PageContent: React.FC<PageContentProps> = ({songs, videos}) => {
                     {videos.map((item) => (
                             <VideoItem
                                 key={item.id}
-                                onClick={(id: string) => onPlay(id)}
+                                onClick={(id: string) => {}}
                                 data={item}
                             />
                         ))}

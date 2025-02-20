@@ -4,6 +4,7 @@ import useLoadVideoImage from "@/hooks/useLoadVideoImage";
 import { Video } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 interface VideoItemProps {
@@ -14,10 +15,15 @@ interface VideoItemProps {
 const VideoItem: React.FC<VideoItemProps> = ({data}) => {
 
     const imagePath = useLoadVideoImage(data);
+    const router = useRouter();
+    const onClick = () => {
+        
+        router.push(`/videos/${data.id}`)
+    }
 
     return (
-        <Link
-        href={`/videos/${data.id}`}
+        <div
+        onClick={onClick}
         className="
            relative
            group
@@ -87,7 +93,7 @@ const VideoItem: React.FC<VideoItemProps> = ({data}) => {
             ">
             
             </div>
-        </Link>
+        </div>
     );
 }
 

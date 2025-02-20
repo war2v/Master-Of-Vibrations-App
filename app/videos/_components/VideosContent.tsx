@@ -6,12 +6,12 @@ import VideoItem from "@/components/VideoItem";
 import useOnPlay from "@/hooks/useOnPlay";
 import { Video } from "@/types";
 
-interface VideoContentProps {
+interface VideosContentProps {
     videos: Video[];
 }
 
 
-const VideoContent: React.FC<VideoContentProps> = ({videos}) => {
+const VideosContent: React.FC<VideosContentProps> = ({videos}) => {
 
     if (videos.length === 0){
         return (
@@ -36,7 +36,6 @@ const VideoContent: React.FC<VideoContentProps> = ({videos}) => {
                         flex-col
                         gap-y-2
                         w-full
-                        px-6
             "
             >
                 {videos.map((video) => (
@@ -50,7 +49,7 @@ const VideoContent: React.FC<VideoContentProps> = ({videos}) => {
                             grid-cols-4
                         ">
                             <VideoItem
-                            onClick={(id: string) => {}}
+                            onClick={(id: string) => {console.log(id)}}
                             data={video}
                             />
                         </div>
@@ -62,4 +61,4 @@ const VideoContent: React.FC<VideoContentProps> = ({videos}) => {
     
 }
 
-export default VideoContent;
+export default VideosContent;
