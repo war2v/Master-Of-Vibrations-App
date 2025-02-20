@@ -3,7 +3,7 @@
 import useLoadVideoImage from "@/hooks/useLoadVideoImage";
 import { Video } from "@/types";
 import Image from "next/image";
-import PlayButton from "./PlayButton";
+import Link from "next/link";
 
 
 interface VideoItemProps {
@@ -11,13 +11,13 @@ interface VideoItemProps {
     onClick: (id: string) => void
 };
 
-const VideoItem: React.FC<VideoItemProps> = ({data, onClick}) => {
+const VideoItem: React.FC<VideoItemProps> = ({data}) => {
 
     const imagePath = useLoadVideoImage(data);
 
     return (
-        <div
-        onClick={() => onClick(data.id)}
+        <Link
+        href={`/videos/${data.id}`}
         className="
            relative
            group
@@ -85,9 +85,9 @@ const VideoItem: React.FC<VideoItemProps> = ({data, onClick}) => {
                 bottom-24
                 right-5
             ">
-                <PlayButton />
+            
             </div>
-        </div>
+        </Link>
     );
 }
 

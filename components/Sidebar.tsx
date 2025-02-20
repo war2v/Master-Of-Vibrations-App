@@ -10,6 +10,7 @@ import Library from "./Library";
 import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
+import { TbVideo } from "react-icons/tb";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -25,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
         {
             icon: HiHome,
             label: 'Home',
-            active: pathname !== '/search',
+            active: pathname === '/',
             href: '/',
         },
         {
@@ -35,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
             href: '/search',
         },
         {
-            icon: BiSearch,
+            icon: TbVideo,
             label: 'Videos',
             active: pathname === '/videos',
             href: '/videos',
