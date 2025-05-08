@@ -14,7 +14,7 @@ Project MOV is a personal music app built with Next.js and Supabase. It’s desi
 
 ✅ Fast, responsive UI with Next.js
 
-⚙️ Tech Stack
+# ⚙️ Tech Stack
 
 Frontend: Next.js, React, Tailwind CSS (or your chosen UI framework)
 
@@ -26,7 +26,7 @@ Other: Supabase Realtime, API integration
 
 (Add your screenshots or demo GIFs here)
 
-💡 What I Learned
+# 💡 What I Learned
 
 Full-stack app development with Next.js & Supabase
 
@@ -36,7 +36,7 @@ Real-time data updates
 
 Building scalable, responsive UIs
 
-📦 Getting Started
+# 📦 Getting Started
 
 Clone the repo:
 
@@ -52,17 +52,15 @@ Run the dev server:
 
 npm run dev
 
-🔗 Live Demo
+# 🔗 Live Demo
 
-Check it out here
+Check it out [here](https://project-mov.netlify.app/)
 
-📄 License
+# 📄 License
 
 This project is licensed under the MIT License.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
+## Getting Started Locally
 
 First, run the development server:
 
