@@ -22,10 +22,6 @@ Backend: Supabase (PostgreSQL, Auth, Storage)
 
 Other: Supabase Realtime, API integration
 
-📸 Screenshots
-
-(Add your screenshots or demo GIFs here)
-
 # 💡 What I Learned
 
 Full-stack app development with Next.js & Supabase
