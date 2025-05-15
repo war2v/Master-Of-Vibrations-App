@@ -22,6 +22,8 @@ Backend: Supabase (PostgreSQL, Auth, Storage)
 
 Other: Supabase Realtime, API integration
 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/war2v/MOV-App/blob/main/public/images/Screenshot%202025-05-15%20112524.png "Logo Title Text 1")
+
 # 💡 What I Learned
 
 Full-stack app development with Next.js & Supabase
