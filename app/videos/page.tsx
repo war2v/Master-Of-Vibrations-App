@@ -29,9 +29,6 @@ const Videos = async ({searchParams}: VideoProps) => {
             <div className="flex">
                 <div className="mb-2 ml-2 px-4 flex flex-col gap-y-2 border-r border-black mr-4 w-1/2 xl:w-1/2 2xl:w-1/4">
                     <div className="mb-2 flex flex-col gap-y-6">
-                        <h1 className="text-white text-3xl font-semibold">
-                            Search
-                        </h1>
                         <VideoInput />
                     </div>
                     <div>
