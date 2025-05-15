@@ -14,8 +14,8 @@ interface VideoProps {
 export const revalidate = 0;
 
 const Videos = async ({searchParams}: VideoProps) => {
-    const videos = await getVideosByTitle((await searchParams).title);
-    const allVideos =await getVideos();
+    const videos    = await getVideosByTitle((await searchParams).title);
+    const allVideos = await getVideos();
     return ( 
         <div className="bg-neutral-900 p-4 h-full w-full rounded-xl">
             <Header className="bg-neutral-900">
