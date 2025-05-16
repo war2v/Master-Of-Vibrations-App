@@ -5,8 +5,12 @@ import getVideos from "@/actions/getVideos";
 import { useEffect } from "react";
 import VideosContent from "../_components/VideosContent";
 
-
-const Videos = async ({params}: {params: {id: string}}) => {
+interface VideoProps {
+    params: {
+        id: string;
+    }
+}
+const Videos = async ({params}: VideoProps ) => {
     const videos = await getVideos();
     const id = await params?.id
     const video = (await getVideosByID(id))[0]
