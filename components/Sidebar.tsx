@@ -26,8 +26,8 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
         {
             icon: HiHome,
             label: 'Home',
-            active: pathname === '/',
-            href: '/',
+            active: pathname === '/home',
+            href: '/home',
         },
         {
             icon: BiSearch,

@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import "./globals.css";
+import "./../globals.css";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 
@@ -38,11 +38,9 @@ export default async function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
-            <Sidebar songs={userSongs}>
+  
               {children}
-            </Sidebar>
-            <Player />
+
           </UserProvider>
         </SupabaseProvider>
         
