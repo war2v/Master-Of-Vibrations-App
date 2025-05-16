@@ -6,13 +6,13 @@ import { useEffect } from "react";
 import VideosContent from "../_components/VideosContent";
 
 interface VideoProps {
-    params: {
+    params: Promise<{
         id: string;
-    }
+    }>
 }
 const Videos = async ({params}: VideoProps ) => {
     const videos = await getVideos();
-    const id = await params?.id
+    const { id } = await params;
     const video = (await getVideosByID(id))[0]
    
 
