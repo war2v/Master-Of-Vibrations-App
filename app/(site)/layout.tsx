@@ -40,7 +40,7 @@ export default async function RootLayout({
           <UserProvider>
   
               {children}
-
+              <Player />
           </UserProvider>
         </SupabaseProvider>
         
