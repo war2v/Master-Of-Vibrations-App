@@ -1,6 +1,6 @@
 "use client";
 import { AiOutlinePlus } from "react-icons/ai";
-import { TbPlaylist } from "react-icons/tb";
+import { TbPlaylist, TbPlaylistAdd, } from "react-icons/tb";
 
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
@@ -8,6 +8,7 @@ import useUploadModal from "@/hooks/useUploadModal";
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
 import useOnPlay from "@/hooks/useOnPlay";
+import { PiPlaylist } from "react-icons/pi";
 
 interface LibraryProps {
     songs: Song[];
@@ -36,59 +37,36 @@ const Library: React.FC<LibraryProps> = ({songs}) => {
         ">
             <div className="
                 flex
-                items-center
-                justify-between
-                px-5
-                pt-4
-            ">
-                <div
-                className="
-                    inline-flex
-                    items-center
-                    gap-x-2
-                ">
-                   <TbPlaylist className="text-neutral-400" size={26}/> 
-                   <p
-                   className="
-                   text-neutral-400
-                   font-medium
-                   text-md
-                   " 
-                   >Your Library
-                   </p>
-
-                </div>
-                    {user?.id === "6ada5bf5-d7eb-46a5-b237-30adeb732a63" &&
-                        <AiOutlinePlus 
-                        onClick={onClick}
-                        size={20}
-                        className="
-                            text-neutral-400
-                            cursor-pointer
-                            hover:text-white
-                            transition
-                        "
-                        />
-                    }
-                    
-            </div>
-            <div className="
-                flex
                 flex-col
                 gap-y-2
                 mt-4
                 px-3
             ">
-                <p
+                <div
                     className="
+                        flex items-center
                         bg-neutral-800
                         opacity-50
                         rounded-md
                         p-2
                     "
                 >
-                    Song Library
-                </p>
+                    <p className=" flex items-center w-full"><PiPlaylist className="text-neutral-400" size={26}/>Library</p> 
+                    <div className="flex w-full justify-end">
+                        {user?.id === "6ada5bf5-d7eb-46a5-b237-30adeb732a63" &&
+                            <TbPlaylistAdd 
+                            onClick={onClick}
+                            size={20}
+                            className="
+                                text-purple-400
+                                cursor-pointer
+                                hover:text-white
+                                transition
+                            "
+                            />
+                        }
+                    </div>
+                </div>
                 {songs.map((item) => (
                     <MediaItem 
                         onClick={(id: string) => onPlay(id)}

@@ -26,8 +26,8 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
         {
             icon: HiHome,
             label: 'Home',
-            active: pathname === '/home',
-            href: '/home',
+            active: pathname === '/music',
+            href: '/music',
         },
         {
             icon: BiSearch,
@@ -49,6 +49,9 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
     `,
         player.activeId && "h-[calc(100%-80px)]"
     )}>
+         <main className="h-full flex-1 overflow-y-auto py-2 ml-2">
+            {children}
+        </main>
         <div className="
             hidden
             md:flex
@@ -79,9 +82,6 @@ const Sidebar: React.FC<SidebarProps> = ({children, songs}) => {
                 <Library songs={songs}/>
             </Box>
         </div>
-        <main className="h-full flex-1 overflow-y-auto py-2 mr-2">
-            {children}
-        </main>
     </div>
   )
 }
