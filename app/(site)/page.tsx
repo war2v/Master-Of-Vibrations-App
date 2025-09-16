@@ -1,5 +1,3 @@
-import ListItem from "@/components/ListItem";
-import Header from "@/components/Header";
 import { Rubik_Glitch } from "next/font/google";
 import RecentSongs from "./_components/RecentSongs";
 import getSongs from "@/actions/getSongs";
