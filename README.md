@@ -16,7 +16,7 @@ Project MOV is a personal music app built with Next.js and Supabase. It’s desi
 
 # ⚙️ Tech Stack
 
-Frontend: Next.js, React, Tailwind CSS (or your chosen UI framework)
+Frontend: Next.js, React, Tailwind CSS
 
 Backend: Supabase (PostgreSQL, Auth, Storage)
 
